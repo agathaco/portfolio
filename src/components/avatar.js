@@ -1,58 +1,41 @@
-import * as React from "react"
+import React, { useRef, useState, useEffect } from 'react';
 
 function Avatar(props) {
-  // const eyes = React.createRef();
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const eyes = useRef(null)
+  const hair = useRef(null)
+  const head = useRef(null)
 
-  let cursorPos = { x: 0, y: 0 };
+  useEffect(() => {
+    const setFromEvent = e => setPosition({ x: e.clientX, y: e.clientY });
+    window.addEventListener("mousemove", setFromEvent);
 
-  let windowWidth = window.innerWidth;
-  let windowHeight = window.innerHeight;
-
-function setWindowSize() {
-    windowWidth = window.innerWidth;
-    windowHeight = window.innerHeight;
-};
-  
-  window.addEventListener("mousemove", mousemove);
-  window.addEventListener("touchmove", touchmove);
-  
-  function mousemove(e) {
-    // const el = this.eyes.current;
-    cursorPos = {
-      x: e.clientX,
-      y: e.clientY
+    return () => {
+      window.removeEventListener("mousemove", setFromEvent);
     };
-    console.log(cursorPos)
-    // this.followMouse(el)
-    // eyes.forEach((el) => this.followMouse(el))
-  }
-  function touchmove(e) {
-    cursorPos = {
-      x: e.targetTouches[0].offsetX,
-      y: e.targetTouches[0].offsetY
-    };
-    // eyes.forEach((el) => this.followMouse(el))
-
-  }
+  }, []);
 
   const getOffset = (el) => {
     el = el.getBoundingClientRect();
-  return {
-    x: el.left + window.scrollX,
-    y: el.top + window.scrollY
-  };
-}
+    return {
+      x: el.left + window.scrollX,
+      y: el.top + window.scrollY
+    };
+  }
 
-  const followMouse = (el) => {
-    const eyeOffset = this.getOffset(el);
+  const followMouse = (el, xOffset, yOffset) => {
+    const eyeOffset = getOffset(el);
     const bBox = el.getBBox();
     const centerX = eyeOffset.x + bBox.width / 2;
     const centerY = eyeOffset.y + bBox.height / 2;
-    const percentTop = Math.round((cursorPos.y - centerY) * 100 / windowHeight);
-    const percentLeft = Math.round((cursorPos.x - centerX) * 100 / windowWidth);
-    el.style.transform = `translate(${percentLeft/5}px, ${ percentTop/5}px)`
+    const percentTop = Math.round((position.y - centerY) * 100 / window.innerHeight);
+    const percentLeft = Math.round((position.x - centerX) * 100 / window.innerWidth);
+    el.style.transform = `translate(${percentLeft/xOffset}px, ${ percentTop/yOffset}px)`
   }
 
+  if (eyes.current) followMouse(eyes.current, 45, 25)
+  if (hair.current) followMouse(hair.current, -20, -20)
+  if (head.current) followMouse(head.current, 50, 50)
 
   return (
     <svg viewBox="0 0 451 340.3" {...props}>
@@ -89,7 +72,6 @@ function setWindowSize() {
           <stop offset={1} stopColor="#f8d671" stopOpacity={0} />
         </linearGradient>
       </defs>
-      <title>{"me"}</title>
       <g data-name="Layer 2">
         <g fill="#60aacf" className="background">
           <path d="M422.7 211.9c15.9 56.1-40.2 130.4-109.5 120.3-28.2-4.1-78.1-34.5-109.6-23.7C96.7 345.2 46.2 288.4 34.9 222c-9.5-55.3 7.1-112.6 61.3-102.9 49.8 8.8 51.7-23.4 89.4-36.4 75.6-26 203.6 11.2 237.1 129.2z" />
@@ -117,33 +99,35 @@ function setWindowSize() {
           <path d="M117 86c1.7 11-12.4 6.4-28.5 9s-28.2 11.1-29.9.1 11.3-38.9 29.2-35.2c23.8 5 27.5 15.1 29.2 26.1z" />
 
           </g>
-        <path
-          data-name="Hair"
-          d="M189.9 152.2c-4.9-1.4-8-7.4-12.9-10.6-8.4-5.5-18-.8-23.4-8.5s3-17.1-3.1-22.2-12.1-10.2-12.1-19.1 7.4-20.6 8.8-27.8-1-19 2-24.9c3.8-7.4 9-10.8 19.6-14.7S184.3 7.1 197.7 5c9.1-1.5 14.7 4.7 20.8 1.5s15.5-5.4 20-4.9 9.8 3.2 17.7 8.4 7.8 6.6 15.4 12.4C286 33.4 290 31 294 37.9c5.7 9.7 2.9 17.6 4.5 24.6s8.4 19.1 8.8 25.9c.9 14.3-12.5 23.4-14.4 30.1s2.3 17.9-10.1 22c-4.5 1.5-5 3.3-8.9 6.6-5.6 4.7-13.7 2.4-17.9 2-16.4-1.5-54.3 6.4-66.1 3.1z"
-          fill="#5b569e"
-          stroke="#363074"
-          strokeLinecap="round"
-          strokeMiterlimit={10}
-          strokeWidth={3}
-        />
-        <path className="dark-mode-only"
-          d="M293 118.5c-.2 7.5 1.8 16.4-10.1 22-4.3 2-5 3.3-8.9 6.6-5.6 4.7-13.7 2.4-17.9 2-16.5-1.5-54.3 6.4-66.2 3.1-4.9-1.4-8-7.4-12.9-10.6-8.4-5.5-18-.8-23.4-8.5-1.8-2.5-1.8-5.5-1.5-8.5a8.7 8.7 0 001.5 3.7c5.4 7.7 15 3 23.4 8.5 4.9 3.2 8 9.2 12.9 10.6 11.8 3.3 49.7-4.6 66.2-3.1 4.2.4 12.3 2.7 17.9-2 4-3.3 4.4-5.1 8.9-6.6 12.3-4.2 10.1-17.2 10.1-17.2z"
-          fill="#f3e69d"
-          fillOpacity={0.7}
-        />
-        <path
-          d="M256.2 10l2.4 1.7c-6.6-4.3-10.3-6.5-15.6-7s-18.8 2.3-25 5.5-8.6-2.5-17.7-1.8c-13.5 1-16.4 15.2-27 19.2s-15.8 7.3-19.6 14.7c-3 5.9-.7 18.8-2 24.9s-8.8 17.9-8.8 27.8 13.7 21.1 7.6 16-12.1-10.2-12.1-19.1 7.4-20.6 8.8-27.8-1-19 2-24.9c3.8-7.4 9-10.8 19.6-14.7S184.3 7.1 197.7 5c9.3-1.4 14.9 4.7 20.8 1.5s15.5-5.4 20-4.9 9.7 3.1 17.7 8.4z"
-          fill="#8a8abd"
-        />
-        <path
-          d="M189.9 152.2c-4.9-1.4-8-7.4-12.9-10.6-8.4-5.5-18-.8-23.4-8.5s3-17.1-3.1-22.2-12.1-10.2-12.1-19.1 7.4-20.6 8.8-27.8-1-19 2-24.9c3.8-7.4 9-10.8 19.6-14.7S184.3 7.1 197.7 5c9.1-1.5 14.7 4.7 20.8 1.5s15.5-5.4 20-4.9 9.8 3.2 17.7 8.4 7.8 6.6 15.4 12.4C286 33.4 290 31 294 37.9c5.7 9.7 2.9 17.6 4.5 24.6s8.4 19.1 8.8 25.9c.9 14.3-12.5 23.4-14.4 30.1s2.3 17.9-10.1 22c-4.5 1.5-5 3.3-8.9 6.6-5.6 4.7-13.7 2.4-17.9 2-16.4-1.5-54.3 6.4-66.1 3.1z"
-          fill="none"
-          stroke="#363074"
-          strokeLinecap="round"
-          strokeMiterlimit={10}
-          strokeWidth={3}
-        />
-        <g>
+          <g id="hair" ref={hair}>
+          <path
+            data-name="Hair"
+            d="M189.9 152.2c-4.9-1.4-8-7.4-12.9-10.6-8.4-5.5-18-.8-23.4-8.5s3-17.1-3.1-22.2-12.1-10.2-12.1-19.1 7.4-20.6 8.8-27.8-1-19 2-24.9c3.8-7.4 9-10.8 19.6-14.7S184.3 7.1 197.7 5c9.1-1.5 14.7 4.7 20.8 1.5s15.5-5.4 20-4.9 9.8 3.2 17.7 8.4 7.8 6.6 15.4 12.4C286 33.4 290 31 294 37.9c5.7 9.7 2.9 17.6 4.5 24.6s8.4 19.1 8.8 25.9c.9 14.3-12.5 23.4-14.4 30.1s2.3 17.9-10.1 22c-4.5 1.5-5 3.3-8.9 6.6-5.6 4.7-13.7 2.4-17.9 2-16.4-1.5-54.3 6.4-66.1 3.1z"
+            fill="#5b569e"
+            stroke="#363074"
+            strokeLinecap="round"
+            strokeMiterlimit={10}
+            strokeWidth={3}
+          />
+          <path className="dark-mode-only"
+            d="M293 118.5c-.2 7.5 1.8 16.4-10.1 22-4.3 2-5 3.3-8.9 6.6-5.6 4.7-13.7 2.4-17.9 2-16.5-1.5-54.3 6.4-66.2 3.1-4.9-1.4-8-7.4-12.9-10.6-8.4-5.5-18-.8-23.4-8.5-1.8-2.5-1.8-5.5-1.5-8.5a8.7 8.7 0 001.5 3.7c5.4 7.7 15 3 23.4 8.5 4.9 3.2 8 9.2 12.9 10.6 11.8 3.3 49.7-4.6 66.2-3.1 4.2.4 12.3 2.7 17.9-2 4-3.3 4.4-5.1 8.9-6.6 12.3-4.2 10.1-17.2 10.1-17.2z"
+            fill="#f3e69d"
+            fillOpacity={0.7}
+          />
+          <path
+            d="M256.2 10l2.4 1.7c-6.6-4.3-10.3-6.5-15.6-7s-18.8 2.3-25 5.5-8.6-2.5-17.7-1.8c-13.5 1-16.4 15.2-27 19.2s-15.8 7.3-19.6 14.7c-3 5.9-.7 18.8-2 24.9s-8.8 17.9-8.8 27.8 13.7 21.1 7.6 16-12.1-10.2-12.1-19.1 7.4-20.6 8.8-27.8-1-19 2-24.9c3.8-7.4 9-10.8 19.6-14.7S184.3 7.1 197.7 5c9.3-1.4 14.9 4.7 20.8 1.5s15.5-5.4 20-4.9 9.7 3.1 17.7 8.4z"
+            fill="#8a8abd"
+          />
+          <path
+            d="M189.9 152.2c-4.9-1.4-8-7.4-12.9-10.6-8.4-5.5-18-.8-23.4-8.5s3-17.1-3.1-22.2-12.1-10.2-12.1-19.1 7.4-20.6 8.8-27.8-1-19 2-24.9c3.8-7.4 9-10.8 19.6-14.7S184.3 7.1 197.7 5c9.1-1.5 14.7 4.7 20.8 1.5s15.5-5.4 20-4.9 9.8 3.2 17.7 8.4 7.8 6.6 15.4 12.4C286 33.4 290 31 294 37.9c5.7 9.7 2.9 17.6 4.5 24.6s8.4 19.1 8.8 25.9c.9 14.3-12.5 23.4-14.4 30.1s2.3 17.9-10.1 22c-4.5 1.5-5 3.3-8.9 6.6-5.6 4.7-13.7 2.4-17.9 2-16.4-1.5-54.3 6.4-66.1 3.1z"
+            fill="none"
+            stroke="#363074"
+            strokeLinecap="round"
+            strokeMiterlimit={10}
+            strokeWidth={3}
+          />
+        </g>
+        <g id="body">
           <path
             data-name="body"
             d="M309.3 220.2v86.5l-170.5-.5v-86.5c-1.1-10.6 7.8-57.1 39.2-57.1 28 0 24.6-25.6 24.6-25.6h39.9s-3.4 25.6 24.6 25.6c31.6 0 43.3 47 42.2 57.6z"
@@ -178,7 +162,8 @@ function setWindowSize() {
             fill="#f062af"
           />
         </g>
-        <g>
+        <g id="head-group" ref={head}>
+          <g  id="face">
           <g strokeMiterlimit={10}>
             <path
               d="M190.8 88.7c.7 6.8-3 12.9-8.3 13.6s-9.4-4.5-10.9-11.2c-2.7-11.4 2.6-15.8 8-16.5s10.5 7.2 11.2 14.1z"
@@ -252,7 +237,7 @@ function setWindowSize() {
             strokeMiterlimit={10}
             strokeWidth={3}
           />
-          <g stroke="#383074" strokeMiterlimit={10}>
+          <g stroke="#383074" strokeMiterlimit={10} >
             <path
               d="M188.2 69.1c2.6-7 8.7-8.6 13.3-7s8.4 3.4 8.4 3.4"
               fill="none"
@@ -260,13 +245,19 @@ function setWindowSize() {
               strokeWidth={3}
             />
             <path
-              d="M243.9 74.2a3.7 3.7 0 003.9-3.5M240.5 73.3a3.7 3.7 0 003.9-3.5"
-              fill="none"
-              strokeLinecap="round"
-              strokeWidth={2}
-            />
-            <ellipse cx={242} cy={76.5} rx={3.8} ry={5.3} fill="#383074" />
-            <g>
+            d="M256 68.6a10.5 10.5 0 00-13.3-6.5c-5.1 1.7-8.4 3.2-8.4 3.2"
+            fill="none"
+            strokeLinecap="round"
+            strokeWidth={3}
+          />
+            <g ref={eyes}>
+              <path
+                d="M243.9 74.2a3.7 3.7 0 003.9-3.5M240.5 73.3a3.7 3.7 0 003.9-3.5"
+                fill="none"
+                strokeLinecap="round"
+                strokeWidth={2}
+              />
+              <ellipse cx={242} cy={76.5} rx={3.8} ry={5.3} fill="#383074" />
               <path
                 d="M200.4 74.2a3.7 3.7 0 01-3.9-3.5M203.7 73.4a3.7 3.7 0 01-3.9-3.5"
                 fill="none"
@@ -275,12 +266,6 @@ function setWindowSize() {
               />
               <ellipse cx={202.2} cy={76.6} rx={3.8} ry={5.3} fill="#383074" />
             </g>
-            <path
-              d="M256 68.6a10.5 10.5 0 00-13.3-6.5c-5.1 1.7-8.4 3.2-8.4 3.2"
-              fill="none"
-              strokeLinecap="round"
-              strokeWidth={3}
-            />
           </g>
           <ellipse
             cx={196.5}
@@ -357,7 +342,8 @@ function setWindowSize() {
             strokeWidth={2}
           />
         </g>
-        <g>
+        </g>
+        <g id="laptop">
           <path
             d="M321.1 318.9v5.3c0 8-5.2 14.6-11.6 14.6H137.2c-6.4 0-11.6-6.6-11.6-14.6v-5.3h195.5z"
             fill="#d0d0d8"
@@ -442,7 +428,8 @@ function setWindowSize() {
             strokeWidth={3}
           />
         </g>
-      </g>
+    
+        </g>
     </svg>
   )
 }

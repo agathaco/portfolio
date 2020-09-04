@@ -15,12 +15,10 @@ import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 
 const IndexPage = () => {
 
-
-
   return (
 
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Agathe Cocco" />
       <header className="container">
         <ThemeToggler>
           {({ theme, toggleTheme }) => (
@@ -43,7 +41,7 @@ const IndexPage = () => {
             <h1>I'm Agathe.</h1>
             <h2>I'm a <span>software developer</span> with a soft spot for web design and animations.</h2>
             <div className="divider"></div>
-            <p>I build apps with <span>React</span> and <span>Node</span>, and create fun and cute things on the internet {/*like <a href="https://codepen.io/agathaco/full/NyQgQX">this</a> or <a href="https://codepen.io/agathaco/full/Reobbg">this</a>*/}. Check out <a href="https://codepen.io/agathaco/">all my experiments</a> on Codepen.</p>
+            <p>I build apps with <span>React</span> and <span>Node</span>, and create fun and cute things on the internet{/* like <a href="https://codepen.io/agathaco/full/NyQgQX">this</a> or <a href="https://codepen.io/agathaco/full/Reobbg">this</a>*/}. <a href="https://codepen.io/agathaco/">Check out</a> all my experiments.</p>
           </div>
           <Social />
         </section>
