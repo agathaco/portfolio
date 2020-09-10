@@ -1,39 +1,34 @@
-@import url(https://fonts.googleapis.com/css?family=Muli:400,300);
+@import url('https://fonts.googleapis.com/css?family=Muli:400,300');
 @import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
 
+$pink: #ff7fc7;
+$lavender: #afa1ff;
+$purple:#4e4fa2;
+$liberty: #5454fc;
+$blue: #7aa6f9;
 
-
-$text-color:#363074;
-$dark-purple:#363074;
-$purple:#5B569E;
-$magenta: #d21687;
-$blue: #38a6cb;
-
-$text-light: #363074;
-$text-dark: #F8F8FF;
-$background-light: #F1F5F8; //#F8F8FF
-$background-dark: #02265D; //#1D1C56; //#1A153F //000054
-// $gradient-dark: linear-gradient(315deg, #2a5470 0%, #1D1C56 75%) ;
-$gradient-dark: linear-gradient(316deg, #02265D 0%, #1E1D56 74%);
-
+$text-dark: #363074;
+$text-light: #F8F8FF;
+$background-light: #F8F8FF; //F1F5F8
+$background-dark: #0E1639;//#02265D; //#1D1C56; //#1A153F //000054
 
 .light {
   --color-page: #{$background-light};
-  --color-text: #{$text-light};
-  // --gradient-page: #{$background-light};
-  transition: all 0.5s ease;
-
+  --color-text: #{$text-dark};
+  --accent-color: #{$liberty};
+  --hair-color: #{$purple};
 }
 
 .dark {
   --color-page: #{$background-dark};
-  --color-text: #{$text-dark};
-  // --gradient-page: #{$gradient-dark};
-  transition: all 0.5s ease;
+  --color-text: #{$text-light};
+  --accent-color: #{$blue};
+  --hair-color: #{$liberty};
 }
 
 .light svg .dark-mode-only {
   opacity: 0;
+  visibility: hidden;
 }
 
 html {
@@ -53,7 +48,7 @@ body {
   background-color: var(--color-page);
   background-image: var(--gradient-page);
   color: var(--color-text);
-  transition: all 2s ease;
+  transition: all 0.75s ease;
   * {
     font-family: 'Muli', sans-serif;
   }
@@ -65,15 +60,16 @@ body {
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 3.2rem;
   font-family: 'Yeseva One', sans-serif;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
 }
 
 .divider {
-  width:70px;
+  width:100px;
   height:4px;
-  background-color:$magenta;
+  background-color:$pink;
   margin-bottom: 1.5rem;
 }
 
@@ -88,17 +84,13 @@ header {
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  // padding: 1.5rem 3rem;
   line-height:2rem;
   text-align: right;
-  // position: absolute;
-  // z-index: 99;
   svg.svg-inline--fa.fa-w-16 {
     display: block;
     width:1.5rem;
     height:1.5rem;
   };
-
 }
 
 .dark-mode-toggle {
@@ -110,7 +102,6 @@ header {
   display: flex;
   flex-shrink: 1;
   position: relative;
-  // padding: 3rem;
   align-items: center;
   justify-content: space-between;
   min-height:calc(100vh - 4.5rem);
@@ -126,33 +117,46 @@ section.avatar {
       transition: opacity 1s ease;
     }
   }
-  .background {
-    @for $i from 1 through (20) {
-      .particles *:nth-of-type(#{$i}) {
-        animation: twinkle 6s infinite cubic-bezier(.17,.67,.83,.67);
-        transform-origin: center center;
-        animation-delay: random(7) + s;
-      }
+  @for $i from 1 through (40) {
+    .particles *:nth-of-type(#{$i}) {
+      animation: twinkle 4s infinite cubic-bezier(.17,.67,.83,.67);
+      transform-origin: center;
+      animation-delay: random(14) + s;
+      border: 1px solid black
     }
   }
+  .hair {
+    fill: var(--hair-color);
+    transition: all 0.75s ease;
+
+  }
+  .blob {
+    animation: blobMorph 50s cubic-bezier(.17,.67,.83,.67) infinite;
+  }
+
 }
 
 section.intro {
   position: relative;
-
   .intro-text span {
-    color: $blue;
+    color: var(--accent-color);
     font-weight: 700;
   }
-
   a, a:visited, a:active, a:hover {
-    color: $blue;
+    color: var(--accent-color);
     font-weight: 700;
+  }
+  h2 {
+    font-size: 1.6rem;
+  }
+  p {
+    -webkit-text-stroke: 0.3px;
+    font-size: 1.1rem;
   }
 }
 
 // social icons
-.contact-icons {
+.social-icons {
   display: flex;
   position: relative;
   svg {
@@ -164,9 +168,6 @@ section.intro {
     path {
       fill: var(--color-text);
       transition: 0.25s;
-      // &:hover {
-      //   fill:$magenta;
-      // }
     }
   }
 }
@@ -178,15 +179,24 @@ section.intro {
     transform: translateY(-5px);
     opacity: 1;
   }
+  .copied {
+    animation: tada 1s ease-in-out;
+    path {
+      fill: $pink;
+      // transform: translateX(100%);
+    }
+  }
 }
 
 // tooltips
 .tooltip {
   padding:0.5rem;
   border-radius: 3px;
-  background-color:$magenta;
-  border: 1px solid $magenta;
-  color:#F1F5F8;
+  background-color:$pink;
+  border: 1px solid $pink;
+  color:#ffffff;
+  font-weight: 700;
+  -webkit-text-stroke-color: #ffffff;
   position: absolute;
   transition:0.25s;
   pointer-events: none;
@@ -198,7 +208,7 @@ section.intro {
     height: 0; 
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-bottom: 10px solid $magenta;
+    border-bottom: 10px solid $pink;
     bottom:100%;
     left:calc(50% - 10px);
   }
@@ -206,7 +216,7 @@ section.intro {
 
 .intro-tooltip {
   font-size: 1.2rem;
-  box-shadow: 0 10px 20px rgba($dark-purple, 0.4), 0 4px 4px rgba($dark-purple, 0.2);
+  box-shadow: 0 10px 20px rgba($text-dark, 0.4), 0 4px 4px rgba($text-dark, 0.2);
   top:-60px;
   left:-25px;
   transform: rotate(-10deg);
@@ -214,7 +224,7 @@ section.intro {
   &:after {
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-top: 10px solid $magenta;
+    border-top: 10px solid $pink;
     border-bottom: none;
     bottom: 0;
     top: 100%;
@@ -230,22 +240,18 @@ section.intro {
   opacity: 0;
   transition:0.25s;
   top: 150%;
-  box-shadow: 0 1px 3px rgba($dark-purple,0.12), 0 1px 2px rgba($dark-purple,0.24);
+  box-shadow: 0 1px 3px rgba($text-dark,0.12), 0 1px 2px rgba($text-dark,0.24);
 }
 
-.blob {
-  box-shadow: 10px 10px 10px black;
-}
 
 footer {
   text-align: center;
   font-size:0.9rem;
-  .contact-icons {
+  .social-icons {
     justify-content: center;
     margin-bottom: 1rem;
   }
 }
-
 
 
 
@@ -255,7 +261,7 @@ footer {
 	}
 	50% {
     transform: translateY(-10%) rotate(-10deg);
-    box-shadow: 0 10px 20px rgba($dark-purple, 0.2);
+    box-shadow: 0 10px 20px rgba($text-dark, 0.2);
 	}
 	100% {
 		transform: translateY(0) rotate(-10deg);
@@ -265,22 +271,49 @@ footer {
 @keyframes twinkle {
 	0%, 100% {
     opacity: 1;
-    // r: 0.5%;
+    r: 0.5%;
 	}
 	50% {
-    opacity: 0.3;
-    // transform: scale(1.1) translate(0);
-    // r: 1.5%;
+    opacity: 0.5;
+    r: 1.7%;
 	}
 }
 
-@media all and (min-width: 1024px) and (max-width: 1280px) { }
-
-@media all and (min-width: 768px) and (max-width: 1024px) {
-  section.avatar {
-    min-width: 400px;
+@keyframes blobMorph {
+  25%, 75% {
+    d: path("M441.6,177.2c20.8,62-41,150.3-120.9,159.6-30.5,3.6-101.2-26.9-135.9-17.5-114.9,31-130-38-163.8-106.6C-7,156.1,29.4,93.9,87.7,104.7c53.7,10,55-34.4,95.6-49C264.8,26.5,405,68,441.6,177.2Z")
   }
- }
+  50% {
+    d: path("M426.2,160.3c-42.9,62.9,95.5,175.3-105.5,176.5-55.2.3-99.9-17.7-135.9-17.5-113.5.6-135.4,31-159.4-73.7C11.3,184,33.5,128.8,87.7,104.7c50.6-22.5,56.4-22.2,97-36.7C266.2,38.7,482.3,78,426.2,160.3Z")
+  }
+}
+
+@keyframes tada {
+  0% {
+      -webkit-transform: scaleX(1);
+      transform: scaleX(1)
+  }
+
+  10%,20% {
+      -webkit-transform: scale3d(.9,.9,.9) rotate(-3deg);
+      transform: scale3d(.9,.9,.9) rotate(-3deg)
+  }
+
+  30%,50%,70%,90% {
+      -webkit-transform: scale3d(1.1,1.1,1.1) rotate(3deg);
+      transform: scale3d(1.1,1.1,1.1) rotate(3deg)
+  }
+
+  40%,60%,80% {
+      -webkit-transform: scale3d(1.1,1.1,1.1) rotate(-3deg);
+      transform: scale3d(1.1,1.1,1.1) rotate(-3deg)
+  }
+
+  to {
+      -webkit-transform: scaleX(1);
+      transform: scaleX(1)
+  }
+}
 
 @media all and (max-width: 768px) {
   .hero {

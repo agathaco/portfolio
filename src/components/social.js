@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faCodepen, faTwitter, faDev } from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
-const social = () => {
+const Social = () => {
+
+  const [copiedToClipBoard, setCopiedStatus] = useState(false);
+
 
   const copyToClipboard = str => {
     const el = document.createElement('textarea');
@@ -12,13 +15,15 @@ const social = () => {
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
+    setCopiedStatus(true);
+    setTimeout(() => { setCopiedStatus(false); }, 2000)
   };
-
+ 
   return (
-    <div className="contact-icons">
+    <div className="social-icons">
     <div className="social-icon">
-      <span className="tooltip social-tooltip">Copy my email</span>
-      <FontAwesomeIcon icon={faEnvelope} size="2x" title="Email" onClick={() => copyToClipboard('agathecocco@gmail.com')}/>
+      <span className="tooltip social-tooltip">{copiedToClipBoard ? 'Copied! 🎉' : 'Copy my email'}</span>
+      <FontAwesomeIcon icon={faEnvelope} className={copiedToClipBoard ? 'copied' : ''} size="2x" title="Email" onClick={() => copyToClipboard('agathecocco@gmail.com')}/>
     </div>
     <div className="social-icon">
     <a href='https://codepen.io/agathaco'>
@@ -48,4 +53,4 @@ const social = () => {
   )
 }
 
-export default social
+export default Social;
