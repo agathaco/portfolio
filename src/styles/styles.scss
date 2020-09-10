@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Muli:400,300');
-@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+
 
 $pink: #ff7fc7;
 $lavender: #afa1ff;
@@ -16,14 +17,14 @@ $background-dark: #0E1639;//#02265D; //#1D1C56; //#1A153F //000054
 .light {
   --color-page: #{$background-light};
   --color-text: #{$text-dark};
-  --accent-color: #{$liberty};
+  --accent-color: #{darken($blue, 10%)};
   --hair-color: #{$purple};
 }
 
 .dark {
   --color-page: #{$background-dark};
   --color-text: #{$text-light};
-  --accent-color: #{$blue};
+  --accent-color: #{lighten($liberty, 5%)};
   --hair-color: #{$liberty};
 }
 
@@ -62,7 +63,7 @@ body {
 
 h1 {
   font-size: 3.2rem;
-  font-family: 'Yeseva One', sans-serif;
+  font-family: 'Limelight', sans-serif;
   letter-spacing: 1px;
   margin-bottom: 1rem;
 }
@@ -99,6 +100,11 @@ header {
     cursor: pointer;
   }
 }
+
+.nowrap {
+  white-space: nowrap;
+}
+
 .hero {
   display: flex;
   flex-shrink: 1;
@@ -134,19 +140,45 @@ section.avatar {
   .blob {
     animation: blobMorph 50s cubic-bezier(.17,.67,.83,.67) infinite;
   }
+  &.mobile {
+    display: none;
+  }
 
 }
 
 section.intro {
   position: relative;
-  .intro-text span {
+  .intro-text span:not([class="nowrap"]){
     color: var(--accent-color);
     font-weight: 700;
   }
-  a, a:visited, a:active, a:hover {
-    color: var(--accent-color);
-    font-weight: 700;
+  p {
+    a, a:visited, a:active, a:hover {
+      color: var(--accent-color);
+      // font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      position: relative;
+      color: inherit;
+      &:before {
+        content:'';
+        position: absolute;
+        bottom:0;
+        left: -5%;
+        width: 110%;
+        height: 0.5rem;
+        z-index: -1;
+        background-color: var(--accent-color);
+        border-radius: 2px;
+        transition: all 0.5s ease;
+
+      }
+      &:hover:before {
+        height: 100%;
+      }
+    }
   }
+
   h2 {
     font-size: 1.6rem;
   }
@@ -160,11 +192,12 @@ section.intro {
 .social-icons {
   display: flex;
   position: relative;
+  justify-content: space-between;
+  width: 320px;
   svg {
     width: 1.5rem;
     height: 1.5rem;
     fill: var(--color-text);
-    margin-right: 1.5rem;
     cursor: pointer;
     path {
       fill: var(--color-text);
@@ -184,7 +217,6 @@ section.intro {
     animation: tada 1s ease-in-out;
     path {
       fill: $pink;
-      // transform: translateX(100%);
     }
   }
 }
@@ -254,8 +286,6 @@ footer {
   }
 }
 
-
-
 @keyframes float {
 	0% {
 		transform: translateY(0px) rotate(-10deg);
@@ -316,7 +346,16 @@ footer {
   }
 }
 
+@media all and (max-width: 1024px) { 
+  section.avatar {
+    min-width:350px;
+  }
+}
+
 @media all and (max-width: 768px) {
+  body {
+    touch-action: none
+  }
   .hero {
     max-width: 100%;
     align-items: center;
@@ -327,10 +366,13 @@ footer {
     padding: 2rem;
   }
   section.avatar {
-    margin-left: 0;
-    margin-top: 2rem;
+    display: block;
     min-width: auto;
-    width: 80%
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+
   }
  }
 
@@ -339,12 +381,24 @@ footer {
     padding: 1rem;
   }
   section.avatar {
+    display: block;
     width: 100%
   }
+  section.intro {
+    h2 {
+      font-size: 1.5rem;
+    }
+    h1 {
+      font-size: 2.8rem;
+      margin-top: 0.5rem;
+    }
+  }
+  .social-icons {
+    width: 100%;
+  }
   .intro-tooltip {
-    // font-size: 1rem;
     padding: 0.3rem;
-    top:-45px;
+    top:-50px;
     left:-5px;
   }
 }

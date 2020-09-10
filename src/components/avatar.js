@@ -9,11 +9,11 @@ function Avatar(props) {
   useEffect(() => {
     const setFromEvent = e => setPosition({ x: e.clientX, y: e.clientY });
     window.addEventListener("mousemove", setFromEvent);
-
     return () => {
       window.removeEventListener("mousemove", setFromEvent);
-    };
+    }
   }, []);
+
 
   const getOffset = (el) => {
     el = el.getBoundingClientRect();
@@ -33,9 +33,11 @@ function Avatar(props) {
     el.style.transform = `translate(${percentLeft/xOffset}px, ${ percentTop/yOffset}px)`
   }
 
-  if (eyes.current) followMouse(eyes.current, 45, 25)
-  if (hair.current) followMouse(hair.current, -20, -20)
-  if (head.current) followMouse(head.current, 50, 50)
+  if (window.innerWidth > 768) {
+    if (eyes.current) followMouse(eyes.current, 45, 25)
+    if (hair.current) followMouse(hair.current, -20, -20)
+    if (head.current) followMouse(head.current, 50, 50)
+  }
 
 
   return (
@@ -73,7 +75,7 @@ function Avatar(props) {
           <stop offset={1} stopColor="#b6e3e3" stopOpacity={0} />
         </linearGradient>
         <clipPath id="prefix__c">
-          <path
+          <path 
             d="M189.4 157c-5-1.4-8.3-7.6-13.3-10.9-8.6-5.7-18.5-.8-24-8.7s3.1-17.6-3.2-22.8-12.5-10.5-12.5-19.6 7.6-21.2 9.1-28.6-1-19.6 2-25.6c3.9-7.6 9.3-11.1 20.2-15.1s16-17.8 29.7-20c9.4-1.5 15.2 4.8 21.4 1.6s15.9-5.6 20.5-5.1 10 3.2 18.2 8.7 8.1 6.8 15.9 12.8c14.8 11.3 19 8.8 23.1 15.9 5.8 10 3 18.1 4.6 25.3s8.6 19.7 9.1 26.7c1 14.7-12.9 24-14.8 31s2.4 18.4-10.4 22.6c-4.6 1.5-5.1 3.4-9.2 6.8-5.8 4.8-14.1 2.5-18.4 2.1-16.9-1.9-55.9 6.3-68 2.9z"
             fill="none"
           />
@@ -137,9 +139,12 @@ function Avatar(props) {
               mixBlendMode: "screen",
             }}
           />
-          <path
+          <path className="hair"
             d="M256 10l2.4 1.7c-6.6-4.3-10.3-6.5-15.6-7s-18.8 2.3-25 5.5-8.6-2.5-17.7-1.8c-13.5 1-16.4 15.2-27 19.2s-15.8 7.3-19.6 14.7c-3 5.9-.7 18.8-2 24.9s-8.8 17.9-8.8 27.8 13.7 21.1 7.6 16-12.1-10.2-12.1-19.1 7.4-20.6 8.8-27.8-1-19 2-24.9c3.8-7.4 9-10.8 19.6-14.7s15.6-17.4 29-19.5c9.3-1.4 14.9 4.7 20.8 1.5s15.5-5.4 19.9-4.9 9.8 3.1 17.7 8.4z"
-            fill="#afa1ff"
+            fill="#5454fc"
+            style={{
+              mixBlendMode: "screen",
+            }}
           />
           <path
             data-name="stroke"
@@ -340,7 +345,7 @@ function Avatar(props) {
           <g clipPath="url(#prefix__c)">
             <path
               d="M209.6 31.9S213 5.7 214.8 3"
-              fill="none"
+              fill="blue"
               stroke="#363074"
               strokeLinecap="round"
               strokeMiterlimit={10}
@@ -567,11 +572,11 @@ function Avatar(props) {
             />
           </g>
           <g>
-            <path
+            <path className="hair"
               d="M357.5 274.1h34.1a16.8 16.8 0 018.1 2c9.8 5.4 11.9 15.6 11.9 27.3 0 9.7-3.1 18.4-11 24.1a7.1 7.1 0 01-4.2 1.3h-43.6a7 7 0 01-4.1-1.3c-7.8-5.8-11-14.4-11-24.1 0-11.7 2.1-21.9 12-27.3a16.4 16.4 0 017.8-2z"
               fill="#5454fc"
             />
-            <path
+            <path className="hair"
               d="M406.9 283.3a22.7 22.7 0 00-6.1-3.7 11.1 11.1 0 00-4.3-.8H365c-9.9 0-18.8 5.5-21.7 13.6-1.7 4.7-2.2 10.1-2.2 15.8s1.6 13.2 5.2 18.4c-6.2-5.7-8.7-13.7-8.7-22.4 0-13.2 2.6-24.6 15.9-29.3l1.1-.2H395a21.9 21.9 0 0111.9 8.6z"
               fill="#5454fc"
               style={{

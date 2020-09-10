@@ -39,9 +39,11 @@ const IndexPage = () => {
           <div className="intro-text">
             <div className="tooltip intro-tooltip">Hi there!</div>
             <h1>I'm Agathe.</h1>
+            <section className="avatar mobile">
+            </section>
             <h2>I'm a <span>software developer</span> with a soft spot for web design and animations.</h2>
             <div className="divider"></div>
-            <p>Lately I have been mostly working with <span>React</span> and <span>Node</span>, but I'm also a big fan of <span>Vue</span>. On the side, I also like to build fun and cute things on the internet{/* like <a href="https://codepen.io/agathaco/full/NyQgQX">this</a> or <a href="https://codepen.io/agathaco/full/Reobbg">this</a>*/}. Have a <a href="https://codepen.io/agathaco/">look</a>.</p>
+            <p>Lately I have been mostly working with <span>React</span> and <span>Node</span>, but I'm also a big fan of <span>Vue</span>. On the side, I also like to build fun and cute things on the internet{/* like <a href="https://codepen.io/agathaco/full/NyQgQX">this</a> or <a href="https://codepen.io/agathaco/full/Reobbg">this</a>*/}. <span className="nowrap">Have a <a href="https://codepen.io/agathaco/">look</a></span>.</p>
           </div>
           <Social />
         </section>
