@@ -7,10 +7,12 @@ function Avatar(props) {
   const head = useRef(null)
 
   useEffect(() => {
-    const setFromEvent = e => setPosition({ x: e.clientX, y: e.clientY });
-    window.addEventListener("mousemove", setFromEvent);
-    return () => {
-      window.removeEventListener("mousemove", setFromEvent);
+    if (window.innerWidth > 768) {
+      const setFromEvent = e => setPosition({ x: e.clientX, y: e.clientY });
+      window.addEventListener("mousemove", setFromEvent);
+      return () => {
+        window.removeEventListener("mousemove", setFromEvent);
+      }
     }
   }, []);
 
@@ -33,11 +35,11 @@ function Avatar(props) {
     el.style.transform = `translate(${percentLeft/xOffset}px, ${ percentTop/yOffset}px)`
   }
 
-  if (window.innerWidth > 768) {
-    if (eyes.current) followMouse(eyes.current, 45, 25)
-    if (hair.current) followMouse(hair.current, -20, -20)
-    if (head.current) followMouse(head.current, 50, 50)
-  }
+  
+  if (eyes.current) followMouse(eyes.current, 45, 25)
+  if (hair.current) followMouse(hair.current, -20, -20)
+  if (head.current) followMouse(head.current, 50, 50)
+  
 
 
   return (
