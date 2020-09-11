@@ -6,15 +6,38 @@ function Avatar(props) {
   const hair = useRef(null)
   const head = useRef(null)
 
-  // useEffect(() => {
-  //   if (window.innerWidth > 768) {
-  //     const setFromEvent = e => setPosition({ x: e.clientX, y: e.clientY });
-  //     window.addEventListener("mousemove", setFromEvent);
-  //     return () => {
-  //       window.removeEventListener("mousemove", setFromEvent);
-  //     }
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (window.innerWidth > 768) {
+      const setFromEvent = e => setPosition({ x: e.clientX, y: e.clientY });
+      window.addEventListener("mousemove", setFromEvent);
+      return () => {
+        window.removeEventListener("mousemove", setFromEvent);
+      }
+    }
+  }, []);
+
+
+  const getOffset = (el) => {
+    el = el.getBoundingClientRect();
+    return {
+      x: el.left + window.scrollX,
+      y: el.top + window.scrollY
+    };
+  }
+
+  const followMouse = (el, xOffset, yOffset) => {
+    const eyeOffset = getOffset(el);
+    const bBox = el.getBBox();
+    const centerX = eyeOffset.x + bBox.width / 2;
+    const centerY = eyeOffset.y + bBox.height / 2;
+    const percentTop = Math.round((position.y - centerY) * 100 / window.innerHeight);
+    const percentLeft = Math.round((position.x - centerX) * 100 / window.innerWidth);
+    el.style.transform = `translate(${percentLeft/xOffset}px, ${ percentTop/yOffset}px)`
+  }
+
+  if (eyes.current) followMouse(eyes.current, 45, 25)
+  if (hair.current) followMouse(hair.current, -20, -20)
+  if (head.current) followMouse(head.current, 50, 50)
 
   return (
     <svg viewBox="0 -5 455 346" {...props}>
