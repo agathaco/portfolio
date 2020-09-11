@@ -6,15 +6,15 @@ function Avatar(props) {
   const hair = useRef(null)
   const head = useRef(null)
 
-  useEffect(() => {
-    if (window.innerWidth > 768) {
-      const setFromEvent = e => setPosition({ x: e.clientX, y: e.clientY });
-      window.addEventListener("mousemove", setFromEvent);
-      return () => {
-        window.removeEventListener("mousemove", setFromEvent);
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (window.innerWidth > 768) {
+  //     const setFromEvent = e => setPosition({ x: e.clientX, y: e.clientY });
+  //     window.addEventListener("mousemove", setFromEvent);
+  //     return () => {
+  //       window.removeEventListener("mousemove", setFromEvent);
+  //     }
+  //   }
+  // }, []);
 
 
   const getOffset = (el) => {
@@ -35,11 +35,9 @@ function Avatar(props) {
     el.style.transform = `translate(${percentLeft/xOffset}px, ${ percentTop/yOffset}px)`
   }
 
-  if(window && window.innerWidth > 768) {
-    if (eyes.current) followMouse(eyes.current, 45, 25)
-    if (hair.current) followMouse(hair.current, -20, -20)
-    if (head.current) followMouse(head.current, 50, 50)
-  }
+  if (eyes.current) followMouse(eyes.current, 45, 25)
+  if (hair.current) followMouse(hair.current, -20, -20)
+  if (head.current) followMouse(head.current, 50, 50)
 
   return (
     <svg viewBox="0 -5 455 346" {...props}>
