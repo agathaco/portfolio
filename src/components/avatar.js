@@ -35,12 +35,11 @@ function Avatar(props) {
     el.style.transform = `translate(${percentLeft/xOffset}px, ${ percentTop/yOffset}px)`
   }
 
-  
-  if (eyes.current) followMouse(eyes.current, 45, 25)
-  if (hair.current) followMouse(hair.current, -20, -20)
-  if (head.current) followMouse(head.current, 50, 50)
-  
-
+  if(window && window.innerWidth > 768) {
+    if (eyes.current) followMouse(eyes.current, 45, 25)
+    if (hair.current) followMouse(hair.current, -20, -20)
+    if (head.current) followMouse(head.current, 50, 50)
+  }
 
   return (
     <svg viewBox="0 -5 455 346" {...props}>

@@ -233,6 +233,7 @@ section.intro {
   position: absolute;
   transition:0.25s;
   pointer-events: none;
+  min-width: 80px;
   &:after {
     position: absolute;
     content: '';
