@@ -354,9 +354,6 @@ footer {
 }
 
 @media all and (max-width: 768px) {
-  body {
-    touch-action: none
-  }
   .hero {
     max-width: 100%;
     align-items: center;
