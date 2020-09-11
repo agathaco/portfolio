@@ -28,9 +28,8 @@ $background-dark: #0E1639;//#02265D; //#1D1C56; //#1A153F //000054
   --hair-color: #{$liberty};
 }
 
-.light svg .dark-mode-only {
+.light svg .dark-mode-only, .dark svg .light-mode-only  {
   opacity: 0;
-  visibility: hidden;
 }
 
 html {
@@ -66,13 +65,15 @@ h1 {
   font-family: 'Limelight', sans-serif;
   letter-spacing: 1px;
   margin-bottom: 1rem;
+  text-shadow: 1px 0px 0px var(--accent-color);
 }
 
 .divider {
   width:100px;
-  height:4px;
+  height:0.5rem;
   background-color:$pink;
   margin-bottom: 1.5rem;
+  border-radius: 2px;
 }
 
 .container {
