@@ -41,7 +41,7 @@ const IndexPage = () => {
             <div className="divider"></div>
             <p>I specialise in JavaScript and have professional experience working with <span>React</span> and <span>Node</span>, but I'm also a big fan of <span>Vue</span>.<br/>
             In my spare time, I like to experiment with illustration and animation through code and create fun things like <a href="https://codepen.io/agathaco/full/NyQgQX">this</a>, <a href="https://codepen.io/agathaco/full/Reobbg">this</a> or <a href="https://codepen.io/agathaco/full/KKVLdgw">this</a>.<br/>
-            I'm currently <span class="no wrap">available for hire</span> and would love to hear from you. Get in touch through one of the links below, or check out more of <span className="nowrap">my <a href="https://codepen.io/agathaco/">creations</a>.</span></p>git st
+            I'm currently <span class="no wrap">available for hire</span> and would love to hear from you. Get in touch through one of the links below, or check out more of <span className="nowrap">my <a href="https://codepen.io/agathaco/">creations</a>.</span></p>
           </div>
           <Social />
         </section>
