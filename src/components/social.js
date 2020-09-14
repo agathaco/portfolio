@@ -22,7 +22,7 @@ const Social = () => {
   return (
     <div className="social-icons">
     <div className="social-icon">
-      <span className="tooltip social-tooltip">{copiedToClipBoard ? 'Copied! 🎉' : 'Copy my email'}</span>
+      <span className="tooltip social-tooltip email-tooltip">{copiedToClipBoard ? 'Copied! 🎉' : 'Copy my email'}</span>
       <FontAwesomeIcon icon={faEnvelope} className={copiedToClipBoard ? 'copied' : ''} size="2x" title="Email" onClick={() => copyToClipboard('agathecocco@gmail.com')}/>
     </div>
     <div className="social-icon">
