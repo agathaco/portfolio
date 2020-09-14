@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `Front-end developer`,
-    description: `Hi, I'm a creative software developer. This is my personal page.`,
+    title: `Creative software developer`,
+    description: `Hi, I'm a creative software developer from France. I specialise in Javascript and React, as well as SVG and CSS animation.`,
     author: `Agathe Cocco`,
   },
   plugins: [
@@ -26,7 +26,7 @@ module.exports = {
       resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {
-          include: /assets/
+          include: /assets/images
         }
       }
     },
