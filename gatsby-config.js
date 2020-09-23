@@ -23,12 +23,21 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-react-svg",
+      resolve: `gatsby-plugin-react-svg`,
       options: {
         rule: {
           include: /assets/
         }
       }
+    },
+    {
+      resolve: `gatsby-plugin-intl`,
+      options: {
+        path: `${__dirname}/src/intl`,
+        languages: [`en`, `fr`],
+        defaultLanguage: `en`,
+        redirect: false,
+      },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,

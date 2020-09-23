@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faCodepen, faTwitter, faDev } from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { FormattedMessage, useIntl } from "gatsby-plugin-intl"
+
 
 const Social = () => {
-
+  const intl = useIntl()
   const [copiedToClipBoard, setCopiedStatus] = useState(false);
-
 
   const copyToClipboard = str => {
     const el = document.createElement('textarea');
@@ -22,7 +23,7 @@ const Social = () => {
   return (
     <div className="social-icons">
     <div className="social-icon">
-      <span className="tooltip social-tooltip email-tooltip">{copiedToClipBoard ? 'Copied! 🎉' : 'Copy my email'}</span>
+      <span className="tooltip social-tooltip email-tooltip">{copiedToClipBoard ? <FormattedMessage id="email.tooltip.copied"/> : <FormattedMessage id="email.tooltip"/>}</span>
       <FontAwesomeIcon icon={faEnvelope} className={copiedToClipBoard ? 'copied' : ''} size="2x" title="Email" onClick={() => copyToClipboard('agathecocco@gmail.com')}/>
     </div>
     <div className="social-icon">
