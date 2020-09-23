@@ -1,0 +1,131 @@
+
+@import url('https://fonts.googleapis.com/css?family=Muli:400,300');
+
+$pink: #ff7fc7;
+$lavender: #afa1ff;
+$purple:#4e4fa2;
+$liberty: #5454fc;
+$blue: #7aa6f9;
+
+.language-container {
+  margin: 0 1em;
+  // border:1px solid white;
+  font-family: 'Muli', sans-serif;
+  font-size: 1rem;
+  padding: 0 0.75rem;
+
+
+  * {
+    transition: all 0.25s ease-in 0s;
+  }
+}
+
+.language-link {
+  // margin:0 5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 700;
+  opacity: 0.5;
+  color: inherit;
+  border: 2px solid $pink;
+  background-color: $pink;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px 0 0 20px;
+  &:hover {
+    opacity:0.8;
+  }
+  &:nth-child(2) {
+    border-radius: 0px 20px 20px 0px;
+    margin-left:-2px;
+  }
+  
+
+  &.active {
+    color: white;
+    opacity: 1;
+  }
+}
+
+.toggle-switch {
+  position: relative;
+  width: 75px;
+  height:100%;
+  display: inline-block;
+  margin-left: 1.5rem;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  text-align: left;
+  &-checkbox {
+    display: none;
+  }
+  &-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 0 solid #bbb;
+    border-radius: 20px;
+    margin: 0;
+  }
+  &-inner {
+    display: flex;
+    width: 200%;
+    transform: translateX(-50%);
+    transition: all 0.3s ease-in 0s;
+    &:before,
+    &:after {
+      width: 50%;
+      height: 34px;
+      padding: 0;
+      line-height: 34px;
+      color: white;
+      font-weight: bold;
+      box-sizing: border-box;
+      font-family: 'Muli', sans-serif;
+      font-size: 1rem;
+    }
+    &:before {
+      content: "FR";
+      left: 0;
+      background-color: $pink;
+      text-transform: uppercase;
+      padding-left: 15px;
+      color: #F8F8FF;
+    }
+  }
+
+  &-inner:after {
+    content: "EN";
+    right: 0;
+    background-color: $blue;
+    text-transform: uppercase;
+    padding-right: 15px;
+    color: #F8F8FF ;
+    text-align: right;
+  }
+  &-switch {
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin: 5px;
+    background: #F8F8FF;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 40px;
+    border-radius: 20px;
+    transition: all 0.3s ease-in 0s;
+  }
+  &-checkbox:checked + &-label {
+    .toggle-switch-inner {
+      transform: translateX(0);
+
+    }
+    .toggle-switch-switch {
+      right: 0px;
+    }
+  }
+}
+

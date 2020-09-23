@@ -1,0 +1,14 @@
+{
+  "title": "Agathe Cocco",
+  "description": "Développeuse software créative",
+  "intro.tooltip": "Bonjour!",
+  "intro.title": "Je m'appelle Agathe.",
+  "intro.desc": "Je suis une <span>développeuse software</span> passionée de design et d'animations",
+  "intro.details": "Specialisée en JavaScript, je travaille habituellement avec <span>React</span> et <span>Node</span>, et parfois <span>Vue</span>. {br} Fan de CSS, design et animations, je cherche constamment à combiner code et créativité afin de créer des choses fun et intéractives comme <link1>ceci</link1>, <link2>ceci</link2>, ou encore <link3>cela</link3>. {br} Je suis actuellement disponible. N'hésitez pas à me contacter grâce aux liens sociaux ci-dessous, ou à découvrir <link4>mes autres créations</link4>.",
+  "email.tooltip": "Copier mon email",
+  "email.tooltip.copied": "Copié! 🎉",
+  "notfound": {
+    "header": "PAGE MANQUANTE",
+    "description": "Il semblerait que vous soyiez perdu..."
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Agathe Cocco",
+  "description": "Creative software developer",
+  "intro.tooltip": "Hi there!",
+  "intro.title": "I'm Agathe.",
+  "intro.desc": "I'm a <span>software developer</span> and <span>contractor</span> with a soft spot for web design and animation.",
+  "intro.details": "I specialise in JavaScript and have professional experience working with <span>React</span> and <span>Node</span>, but I'm also a big fan of <span>Vue</span>. {br} In my spare time, I like to experiment with illustration and animation through code and create fun things like <link1>this</link1>, <link2>this</link2> or <link3>this</link3>.{br} I'm currently <nowrap>available for hire</nowrap> and would love to hear from you. Get in touch through one of the links below, or check out more of <link4>my creations</link4>.",
+  "email.tooltip": "Copy my email",
+  "email.tooltip.copied": "Copied! 🎉",
+  "notfound": {
+    "header": "NOT FOUND",
+    "description": "You just hit a route that doesn't exist... the sadness."
+  }
+}

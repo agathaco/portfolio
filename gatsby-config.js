@@ -10,6 +10,12 @@ module.exports = {
     `gatsby-plugin-fontawesome-css`,
     `gatsby-plugin-dark-mode`,
     {
+      resolve: `gatsby-plugin-transition-link`,
+      options: {
+          layout: require.resolve(`./src/components/Layout.js`)
+        }
+   },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `assets`,
@@ -23,12 +29,21 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-react-svg",
+      resolve: `gatsby-plugin-react-svg`,
       options: {
         rule: {
           include: /assets/
         }
       }
+    },
+    {
+      resolve: `gatsby-plugin-intl`,
+      options: {
+        path: `${__dirname}/src/intl`,
+        languages: [`en`, `fr`],
+        defaultLanguage: `en`,
+        redirect: false,
+      },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
