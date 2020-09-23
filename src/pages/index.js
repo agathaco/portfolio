@@ -53,7 +53,6 @@ const IndexPage = () => {
                 span: chunks => <span>{chunks}</span>
               }}/>
              </h2>
-            {/* <h2>I'm a <span>software developer</span> and <span>contractor</span> with a soft spot for web design and animation.</h2> */}
             <div className="divider"></div>
             <p>
               <FormattedMessage
