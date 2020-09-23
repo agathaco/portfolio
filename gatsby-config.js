@@ -10,12 +10,6 @@ module.exports = {
     `gatsby-plugin-fontawesome-css`,
     `gatsby-plugin-dark-mode`,
     {
-      resolve: `gatsby-plugin-transition-link`,
-      options: {
-          layout: require.resolve(`./src/components/Layout.js`)
-        }
-   },
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `assets`,
