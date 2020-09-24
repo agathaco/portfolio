@@ -11,10 +11,10 @@ const Layout = ({ children }) => {
   return (
     <>
       <main className="main-container">{children}</main>
-      <footer>
-        <Social/>
-        © {new Date().getFullYear()} Agathe Cocco. Built and designed by me with <FontAwesomeIcon icon={faCoffee} size="1x" title="Coffee Cup"/> and Gatsby.
-      </footer>
+      // <footer>
+      //   <Social/>
+      //   © {new Date().getFullYear()} Agathe Cocco. Built and designed by me with <FontAwesomeIcon icon={faCoffee} size="1x" title="Coffee Cup"/> and Gatsby.
+      // </footer>
     </>
   )
 }
