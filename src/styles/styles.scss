@@ -58,6 +58,7 @@ body {
 .main-container {
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 
 .container {
@@ -83,7 +84,6 @@ h1 {
 }
 
 header {
-  flex: 1;
   display: flex;
   justify-content: flex-end;
   width: 100%;
@@ -110,11 +110,10 @@ header {
 
 .hero {
   display: flex;
-  flex-shrink: 1;
+  flex: 1;
   position: relative;
   align-items: center;
   justify-content: space-between;
-  min-height:calc(100vh - 4.5rem);
 }
 
 section.avatar {
