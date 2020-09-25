@@ -48,7 +48,7 @@ const IndexPage = () => {
             <h2>
               <FormattedMessage 
               id="intro.desc"
-              defaultMessage="I'm a <span>software developer</span> and <span>contractor</span> with a soft spot for web design and animation."
+              defaultMessage="I'm a software developer and contractor with a soft spot for web design and animation."
               values={{
                 span: chunks => <span>{chunks}</span>
               }}/>
@@ -57,8 +57,8 @@ const IndexPage = () => {
             <p>
               <FormattedMessage
                 id="intro.details"
-                defaultMessage="I specialise in JavaScript and have professional experience working with <span>React</span> and <span>Node</span>, but I'm also a big fan of <span>Vue</span>. <br> In my spare time, I like to experiment with illustration and animation through code and create fun things like <link1>this</link1>, <link2>this</link2> or <link3>this</link3>.<br>
-                I'm currently <nowrap>available for hire</nowrap> and would love to hear from you. Get in touch through one of the links below, or check out more of <link4>creations</link4>."
+                defaultMessage="I specialise in JavaScript and have professional experience working with React and Node, but I'm also a big fan of Vue. In my spare time, I like to experiment with illustration and animation through code and create fun things like this, this or this.
+                I'm currently available for hire and would love to hear from you. Get in touch through one of the links below, or check out more of creations."
                 values={{
                   span: boldText => <span>{boldText}</span>,
                   br: <br/>,
